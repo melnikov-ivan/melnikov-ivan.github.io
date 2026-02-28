@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Хостинг статического сайта</title>
+    	<link rel="stylesheet" href="/assets/style.css">
+    	 
+    
+        <meta name="description" content="генератор статических сайтов, бесплатный хостинг">
+    
+
+	</head>
+
+	<body class="dev">
+	<div id="wrapper">
+
+	
+
+	<header id="header">
+		<div class="logo">
+			<a href="/">
+			Мельников Иван
+			</a>
+		</div>
+
+		<nav>
+			<label for="show-menu" class="show-menu"></label>
+			<input type="checkbox" id="show-menu" role="button"/>
+			<ul id="menu">
+				<li class="nav-model"><a href="/model">Моделизм</a></li>
+				<li class="nav-radio"><a href="/radio">Электроника</a></li>
+				<li class="nav-dev"><a href="/dev">Dev</a></li>
+				<li class="nav-contact"><a href="/contact">Контакты</a></li>
+				<li class="nav-search"><a href="/search">Поиск</a></li>
+			</ul>
+		</nav>
+	</header>
+	<br style="clear:both;"/>
+
+	
+
+	<section id="content">
+
+	
+
+<span itemprop="articleSection">
+<a href="/">Главная</a>
+ 
+	
+	 
+	/ <a href="/dev">Dev</a>
+	
+
+   
+</span>
+
+<h1>Хостинг статического сайта</h1>
+
+
+
+<ul id="tags">
+
+	<li>
+		<a href="/tag/git">Git</a>
+	</li>	
+
+	<li>
+		<a href="/tag/hg">Hg</a>
+	</li>	
+
+	<li>
+		<a href="/tag/python">Python</a>
+	</li>	
+
+	<li>
+		<a href="/tag/tools">Tools</a>
+	</li>	
+
+</ul>
+
+
+
+
+
+<section id="page-content">
+	<p>
+<!-- 1. Link to jQuery (1.8 or later), -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!-- 33 KB -->
+
+<!-- fotorama.css & fotorama.js. -->
+<link  href="//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB --></p>
+<p>Статические сайты пользуются большой популярностью, т.к. обладают определенными преимуществами по сравнению с CMS</p>
+<ul>
+<li>простой хостинг</li>
+<li>любая структура сайта</li>
+<li>держит высокую нагрузку</li>
+</ul>
+<p>Чтобы публикация статического сайта не вызывала страдания, надо как можно лучше автоматизировать этот процесс. Рассмотрим связку: Bitbucket → Tagy → Codeship → Github.</p>
+<h2>Генерация статического сайта</h2>
+<p>Я использую <a href="https://goo.gl/tr2yUc">Tagy</a>.  Он очень гибкий, а также обладает удобными встроенными плагинами для картинок и т.п. Для сборки требуется одна команда</p>
+<pre><code>./tagy.py -b
+</code></pre>
+<p>, или из python</p>
+<pre><code>#!/usr/bin/env python
+import tagy
+tagy.generate()
+</code></pre>
+<p>Исходный код сайта (страницы, картинки, файлы) хранится в системе контроля версий <a href="https://bitbucket.org/imelnikov/imelnikov.ru/src">Bitbucket</a>.</p>
+<h2>Codeship static site</h2>
+<p>Текущий статус сборки <a href="https://app.codeship.com/projects/155411"> <img src="https://app.codeship.com/projects/e7f7b5d0-09f9-0134-0986-0ed96050b2d1/status?branch=default" alt="Codeship Status for imelnikov/imelnikov.ru"></a></p>
+<p>Для публикации используется сервис CI Codeship. Он подключается к репозиторию в BibBucket или GitHub и после каждого коммита выполняет предписанные действия:</p>
+<ul>
+<li>выкачивает исходники (всегда, дефолтное поведение)</li>
+<li>устанавливает генератор сайта</li>
+<li>запускает сборку сайта</li>
+<li>публикует готовый контент на хостинг (GH-pages)</li>
+</ul>
+<p>Codeship имеет бесплатные варианты аккаунтов. Регистрируем свой репозиторий <a href="https://codeship.com/projects/new">https://codeship.com/projects/new</a> и переходим в настройки.</p>
+<h3>Установка покетов</h3>
+<p>Setup command - скрипты для установки зависимостей</p>
+<pre><code>pip install tagy
+</code></pre>
+<h3>Генерация сайта</h3>
+<p>Configure test pipline - скрипты самой сборки.</p>
+<ul>
+<li>Исходники по умолчанию загружаются в папку <code>~/clone/</code>.</li>
+<li>в файле <a href="https://bitbucket.org/imelnikov/imelnikov.ru/src/5fdc89b47b99bde5362dc611b8953e611f2cbfb5/build.py">build.py</a> команда для генерации<pre><code>cd ~/clone/
+python build.py
+</code></pre>
+</li>
+</ul>
+<h3>Публикация</h3>
+<p>На вкладке Deployment пишем что делать в случае успешной сборки. Я использую GitHub-Pages для хостинга, т.к. он проще всего настраивается и поддерживает доменные имена. Соответственно в скрипте пушим папку со сгенеренным сайтом в github.
+На вкладке 'General' есть поле 'SSH public key'. Добавляем этот ключ в настройках github-репозитория (Settings -&gt; Deploy keys)</p>
+<pre><code>cd public/
+
+git config --global user.email "&lt;your email&gt;"
+git config --global user.name "&lt;your name&gt;"
+
+git add .
+git commit -m "$CI_MESSAGE"
+git push --force git@github.com:melnikov-ivan/melnikov-ivan.github.io.git
+</code></pre>
+<p><div class="fotorama" data-nav="thumbs" data-width="800px" data-ratio="">
+    
+    
+    <a href="/img/codeship/install.png"><img src="/img/codeship/install-172x172.png"/></a>
+    
+    
+    <a href="/img/codeship/build.png"><img src="/img/codeship/build-172x172.png"/></a>
+    
+    
+    <a href="/img/codeship/deploy.png"><img src="/img/codeship/deploy-172x172.png"/></a>
+    
+</div></p>
+<p>Теперь сайт доступен по адресу <a href="http://melnikov-ivan.github.io">melnikov-ivan.github.io</a>.</p>
+<h2>Custom domain for GitHub pages</h2>
+<p>Для подключения доменного имени к github-pages надо:</p>
+<ul>
+<li>добавить файл <code>CNAME</code>, содержащий имя домена, в корень репозитория</li>
+<li>у регистратора доменов добавляем a-записи с ip-адресами github'а<pre><code>192.30.252.153
+192.30.252.154
+</code></pre>
+Подробнее на <a href="https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider">странице помощи github-pages</a></li>
+</ul>	
+</section>
+
+
+	<div id="disqus_thread"/>
+<script type="text/javascript">
+    var disqus_shortname = 'imelnikov';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+	</section>
+
+	
+
+	<footer id="footer">
+	<div class="powered">
+	Powered by <a href="https://github.com/melnikov-ivan/tagy">Tagy</a>
+	</div>
+	</footer>
+
+	</div>
+
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/ga.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-56086874-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+	    (function (d, w, c) {
+	        (w[c] = w[c] || []).push(function() {
+	            try {
+	                w.yaCounter33290838 = new Ya.Metrika({
+	                    id:33290838,
+	                    clickmap:true,
+	                    trackLinks:true,
+	                    accurateTrackBounce:true
+	                });
+	            } catch(e) { }
+	        });
+
+	        var n = d.getElementsByTagName("script")[0],
+	            s = d.createElement("script"),
+	            f = function () { n.parentNode.insertBefore(s, n); };
+	        s.type = "text/javascript";
+	        s.async = true;
+	        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+	        if (w.opera == "[object Opera]") {
+	            d.addEventListener("DOMContentLoaded", f, false);
+	        } else { f(); }
+	    })(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/33290838" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	</body>
+</html>

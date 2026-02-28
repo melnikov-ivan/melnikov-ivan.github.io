@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Подводная лодка на радиоуправлении</title>
+    	<link rel="stylesheet" href="/assets/style.css">
+    	 
+    
+        <meta name="description" content="самодельная подводная лодка на радиоуправлении">
+    
+
+	</head>
+
+	<body class="model">
+	<div id="wrapper">
+
+	
+
+	<header id="header">
+		<div class="logo">
+			<a href="/">
+			Мельников Иван
+			</a>
+		</div>
+
+		<nav>
+			<label for="show-menu" class="show-menu"></label>
+			<input type="checkbox" id="show-menu" role="button"/>
+			<ul id="menu">
+				<li class="nav-model"><a href="/model">Моделизм</a></li>
+				<li class="nav-radio"><a href="/radio">Электроника</a></li>
+				<li class="nav-dev"><a href="/dev">Dev</a></li>
+				<li class="nav-contact"><a href="/contact">Контакты</a></li>
+				<li class="nav-search"><a href="/search">Поиск</a></li>
+			</ul>
+		</nav>
+	</header>
+	<br style="clear:both;"/>
+
+	
+
+	<section id="content">
+
+	
+
+<span itemprop="articleSection">
+<a href="/">Главная</a>
+ 
+	
+	 
+	/ <a href="/model">Моделизм</a>
+	
+
+   
+</span>
+
+<h1>Подводная лодка на радиоуправлении</h1>
+
+
+
+<ul id="tags">
+
+	<li>
+		<a href="/tag/подводная лодка">Подводная Лодка</a>
+	</li>	
+
+	<li>
+		<a href="/tag/радиоуправление">Радиоуправление</a>
+	</li>	
+
+	<li>
+		<a href="/tag/модель">Модель</a>
+	</li>	
+
+	<li>
+		<a href="/tag/электроника">Электроника</a>
+	</li>	
+
+</ul>
+
+
+
+
+
+<section id="page-content">
+	<p>
+<!-- 1. Link to jQuery (1.8 or later), -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!-- 33 KB -->
+
+<!-- fotorama.css & fotorama.js. -->
+<link  href="//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB --></p>
+<p>Цель данной статьи - сделать простую подводную лодку на радиоуправлении. Не требуется изготовление деталей на сложных станках, всё покупается либо в хозяйственном магазине, либо в Китае. В конце статьи приведены ссылки для заказа зарубежом.</p>
+<p><div class="fotorama" data-nav="thumbs" data-width="100%" data-ratio="800/600">
+    
+    
+    <a href="/img/submarine/submarine.jpg"><img src="/img/submarine/submarine-172x172.jpg"/></a>
+    
+</div></p>
+<h2>Теория</h2>
+<p>Модель подводной лодки строится по тем же принципам, что и настоящая. В центре находится "прочный" водоНЕпроницаемый корпус, внутри которого скрыты все органы управления и электроника. Снаружу он окружен "легким" проницаемым корпусом, служащим для обтекания и красивого внешнего вида. Наша модель будет состоять только из прочного корпуса.</p>
+<p>На скорости подводная лодка может погружаться за счет рулей глубины, а в статическом положении только с помощью балластной цистерны. Как это работает? При плавании на поверхности масса лодки чуть меньше массы объема вытесненной воды (закон Архимеда). Т.е. если лодка имеет объем 3л, то ее масса должна быть чуть меньше 3кг. Затем лодка начинает набирать воду внутрь прочного корпуса. Объем корпуса остается тот же, а масса увеличивается - и лодка погружается. В этот момент внутри корпуса немного увеличивается воздушное давление, но не на столько, чтобы нарушить герметичность.</p>
+<p>Теоретические расчеты погружения <a href="/model/submarine/ballast">модели подводной лодки</a>.</p>
+<p>При строительстве есть 3 основные проблемы. Они вполне независимы и могут решаться отдельно.</p>
+<ul>
+<li>радио-аппаратура (2.4 ГГц не работают под водой)</li>
+<li>герметизация -- корпус, вал двигателя и тяги рулей</li>
+<li>балластная цистерна</li>
+</ul>
+<p>Начнем по порядку.</p>
+<h2>Радиоаппаратура</h2>
+<p>2.4 ГГц не проходят под водой. Самый простой способ найти старую аппаратуру в МГц-евом диапазоне (27МГц, 35МГц, 40МГц, 72МГц или даже 433МГц). Они еще остались у моделистов и можно найти объявления о продаже на форумах.</p>
+<p>Моделисты, пожалуйста, не выбрасывайте старые аппаратуры! Подводники купят их у вас ;) 
+Это был самый сложный вопрос, дальше все просто.</p>
+<h2>Герметизация</h2>
+<p>Нам нужно обеспечить герметичность 3 элементов:</p>
+<ul>
+<li>прочный корпус</li>
+<li>вал двигателя</li>
+<li>тяги управления рулей </li>
+</ul>
+<h3>Прочный Корпус</h3>
+<p>часто называется ВПЦ (ВодоНеПроницаемыйЦилиндр) или WTC (WaterTightCilinder), представляет собой пластиковую трубу диаметром 75 мм длиной 600мм. С обоих торцов в нее вставляются цилиндрические заглушки с канавкой под уплотнительное кольцо. Труба покупается в сантехническом магазине, заглушки будем делать из нескольких слоев листового ПВХ толщиной 4-5мм, а кольца заказываем в Китае (о том как покупать на Алиэкспрессе написано в конце статьи).</p>
+<p><div class="fotorama" data-nav="thumbs" data-width="100%" data-ratio="800/600">
+    
+    
+    <a href="/img/submarine/IMG_20160228_151825.jpg"><img src="/img/submarine/IMG_20160228_151825-172x172.jpg"/></a>
+    
+    
+    <a href="/img/submarine/IMG_20160228_153016.jpg"><img src="/img/submarine/IMG_20160228_153016-172x172.jpg"/></a>
+    
+    
+    <a href="/img/submarine/IMG_20160228_154143.jpg"><img src="/img/submarine/IMG_20160228_154143-172x172.jpg"/></a>
+    
+    
+    <a href="/img/submarine/IMG_20160228_162856.jpg"><img src="/img/submarine/IMG_20160228_162856-172x172.jpg"/></a>
+    
+    
+    <a href="/img/submarine/IMG_20160229_232118.jpg"><img src="/img/submarine/IMG_20160229_232118-172x172.jpg"/></a>
+    
+    
+    <a href="/img/submarine/IMG_20160404_225237.jpg"><img src="/img/submarine/IMG_20160404_225237-172x172.jpg"/></a>
+    
+</div></p>
+<p>Заглушка будет состоять из 6 слоев. Внутренний диаметр трубы равен 71 мм, толщина уплотнительного кольца 3,5мм. Тогда основные листы имеют диаметр 70мм, маленькие 65мм и внешний большой 75мм. Очень важно и очень сложно соблюсти соосность листов, чтобы кольца прижимались равномерно к трубе. Для центровки используется болт диаметром 6мм (или строительная шпилька). Сначала сверлим отверстие, затем чертим цилиндр нужного диаметра и вырезаем лобзиком с запасом. Доводим до нужного диаметра на оси зажатой в дрель. Я обтачивал наждачкой на бруске.</p>
+<p>Склеиваем листы тоже на оси, стараясь соблюсти перпендикулярность. Самый лучший клей для ПВХ "Момент-Гель". Титан не берет, обычный "Момент" - тоже. Все, одеваем резиновые кольца и идем тестировать на герметичность.</p>
+<p><div class="fotorama" data-nav="thumbs" data-width="100%" data-ratio="800/600">
+    
+    
+    <a href="/img/submarine/IMG_7668.JPG"><img src="/img/submarine/IMG_7668-172x172.JPG"/></a>
+    
+</div></p>
+<p>Позже напечатал заглушку на 3d-принтере - очень понравилась точность. Сейчас планирую все детали напечатать. Об этом в отдельной статье.</p>
+<h3>Дейдвуд</h3>
+<p>Так называется узел, обеспечивающий герметичность вала двигателя. В торцы внешней трубы впаиваются подшипники. Вставляется вал и внутрь трубы забивается густая смазка (например литол). Ее надо иногда добавлять, т.к. вода постепенно вымывает.</p>
+<p>Валы и подшипники купил на Али, медные трубки и смазку на строительном рынке. Я нашел подшипники 3мм внутренний и 6мм внешний диаметр. Соответственно покупаем валы из нержавейки на 3 мм, и медную трубку с внутренним на 6 мм (внешний получился 8мм). Валы обязательно покупать специальные, обычная проволока несиметрична, будут биения. Сначала припаиваем патрубок, затем просверливаем в нем отверстие. Для пайки понадобится кислота и 3-ья рука ;)</p>
+<p><div class="fotorama" data-nav="thumbs" data-width="100%" data-ratio="800/600">
+    
+    
+    <a href="/img/submarine/IMG_20160321_000659.jpg"><img src="/img/submarine/IMG_20160321_000659-172x172.jpg"/></a>
+    
+    
+    <a href="/img/submarine/IMG_20160326_111328.jpg"><img src="/img/submarine/IMG_20160326_111328-172x172.jpg"/></a>
+    
+    
+    <a href="/img/submarine/IMG_20160402_213829.jpg"><img src="/img/submarine/IMG_20160402_213829-172x172.jpg"/></a>
+    
+</div></p>
+<h3>Тяги рулей</h3>
+<p>Тяги выводим через резиновые манжеты закрепленные на медных трубках диаметром 6мм. Диаметр самих тяг 1.5мм. Я использовал жесткий провод со снятой изоляцией.</p>
+<h2>Балластная цистерна</h2>
+<p>Обычно это самая сложная часть подводной лодки. Но мы сделаем ее просто - воспользуемся микронасосом. Точнее перистальтическим микронасосом - он сам держит давление и не требует дополнительных клапанов. Сам насос способен развивать давление в 1 атмосферу, это значит он сможет прокачать цистерну на глубине до 10 метров. Управляется насос так же как обычным электромотором - регулятор хода или серва с микро-переключателями.</p>
+<p>Есть вариант наполнять резиновый шарик, но он может лопнуть. Воспользуемся шприцом на 150 мл, называется шприц-Жане. Насос сам двигает поршень. Позже можно повесить датчики и контролировать объем поступившей воды.</p>
+<p>Оригинальная силиконовая трубка в насосе 2.5<em>4мм, поменял на 4</em>6мм. В итоге пропускная способность увеличилась в 1.5 раза. Мотор расчитан на 6 вольт, подаю 12. Мотор немного нагревается, но не критично. Итоговая скорость 100мл за 20 сек.</p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/WSkp1Lp2W5w" frameborder="0" allowfullscreen></iframe></p>
+<h2>Компоновка</h2>
+<p>Лодка имеет размеры 60см длина и 7,5см диаметр. Внутренний диаметр 71мм. Заглушки заходят на 2.5см каждая.</p>
+<p>Внутри корпус поделен на "отсеки".</p>
+<ul>
+<li>1 - аккумулятор и приемник</li>
+<li>2 - цистерна</li>
+<li>3 - насос</li>
+<li>4 - сервы и регуляторы хода</li>
+<li>5 - главный мотор</li>
+</ul>
+<p>Цистерна должна находиться по середине, чтобы лодка погружалась горизонтально (не было дифферента).</p>
+<p>Элеметны крепления изготовлены из листового пористого ПВХ толщиной 5мм. Затем они стягиваются на железных шпильках, расположенных вдоль корпуса. Заднюю заглушку тоже следует закрепить на шпильках, чтобы обеспечить жесткоть узла с мотором и тягами рулей.</p>
+<p><div class="fotorama" data-nav="thumbs" data-width="100%" data-ratio="800/600">
+    
+    
+    <a href="/img/submarine/IMG_7675.JPG"><img src="/img/submarine/IMG_7675-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7677.JPG"><img src="/img/submarine/IMG_7677-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7687.JPG"><img src="/img/submarine/IMG_7687-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7678.JPG"><img src="/img/submarine/IMG_7678-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7688.JPG"><img src="/img/submarine/IMG_7688-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7681.JPG"><img src="/img/submarine/IMG_7681-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7692.JPG"><img src="/img/submarine/IMG_7692-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7698.JPG"><img src="/img/submarine/IMG_7698-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7695.JPG"><img src="/img/submarine/IMG_7695-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7711.JPG"><img src="/img/submarine/IMG_7711-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7706.JPG"><img src="/img/submarine/IMG_7706-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7704.JPG"><img src="/img/submarine/IMG_7704-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7707.JPG"><img src="/img/submarine/IMG_7707-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7708.JPG"><img src="/img/submarine/IMG_7708-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/submarine-plan.png"><img src="/img/submarine/submarine-plan-172x172.png"/></a>
+    
+</div></p>
+<p>Изначально для управления мотором и насосом использовались регуляторы хода. Но реверс у них на много медленнее прямого вращения, что не удобно для насоса. 
+Во время испытания я не ставил отдельную схему питания UBEC и использовал встроенный BEC на 1 ампер. Т.к. мне пришла бракованная серва, которая заклинивала, в этот момент ток подскакивал и палил весь регулятор. Может и не весь, но он больше не работал как положено. Так я спалил 3 регулятора и решил сделать схему с микро-переключателями. Она очень простая и обеспечивает симметричное вращение вперед/назад. Но стабилизатор питания на 3 ампера все таки лучше поставить.</p>
+<p><div class="fotorama" data-nav="thumbs" data-width="100%" data-ratio="800/600">
+    
+    
+    <a href="/img/submarine/esc.png"><img src="/img/submarine/esc-172x172.png"/></a>
+    
+</div></p>
+<p>Мотор 550-ой серии избыточен для модели такого размера, можно поставить меньше. Крепится он шурупами на специальный кронштеин к задней заглушке. Соединение с валом через латунную муфту.</p>
+<p>Так же стоит поставить модули Fail-safe на каналы насоса и двигателя. Двигатель настраивается на выключение, а насос на продувку цистерны.</p>
+<p>Все <a href="/model/draft/submarine">чертежи</a> на отдельной странице.</p>
+<h2>Балансировка </h2>
+<p>Объем корпуса приблизительно равен 2,8 литра. Масса всех деталей около 1кг, пришлось добавить еще 1,8 кг груза. Главный принцип прост:</p>
+<p><strong>Объем надводной части должен быть меньше объема цистерны</strong></p>
+<p>Он может быть любой массы, лишь бы общая оставалась 2.8 кг. Поэтому надводные элементы делают из меди или тонких пластиков.</p>
+<p>Балансировка осуществлуяется в 2 положениях:</p>
+<ul>
+<li><strong>Надводное</strong> - Двигая/добавляя грузы и приклеивая пенопласт в подводную часть, добиваемся нулевого дифферента. Важно на этом этапе крепить пенопласт только <em>ниже</em> ватерлинии.</li>
+<li><p><strong>Погруженное</strong> - добавляем пенопласт <em>выше</em> ватерлинии и добиваемся горизонта.</p>
+<p><div class="fotorama" data-nav="thumbs" data-width="100%" data-ratio="800/600">
+    
+    
+    <a href="/img/submarine/submarine.jpg"><img src="/img/submarine/submarine-172x172.jpg"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7721.JPG"><img src="/img/submarine/IMG_7721-172x172.JPG"/></a>
+    
+    
+    <a href="/img/submarine/IMG_7730.JPG"><img src="/img/submarine/IMG_7730-172x172.JPG"/></a>
+    
+</div></p>
+</li>
+</ul>
+<h2>Купить на Алиэкспресе</h2>
+<p>Ссылки - ключевые слова для поиска. Так же выбирайте галочку "бесплатная доставка" и "сортировать по цене".</p>
+<ul>
+<li>подшипники 3<em>6</em>2.5 - <a href="https://goo.gl/G4kOUU">mr63zz</a></li>
+<li>валы из нержавейки 3мм - <a href="https://goo.gl/JyZQhF">stainless steel shaft 3mm</a></li>
+<li>резиновое уплотнительное кольцо - <a href="https://goo.gl/Kp60az">o-ring 72mm</a></li>
+<li>латунная муфта 3.17 х 3 мм - <a href="https://goo.gl/iIEaz3">coupler 3.17mm 3mm</a></li>
+<li>резиновая гофра для тяг - <a href="https://goo.gl/CXSEqo">Waterproof Push Rod Rubber</a></li>
+<li>винт 40мм под вал 2мм - <a href="https://goo.gl/rsDU32">three leaf propeller 40mm</a></li>
+<li>мотор 550 серии - <a href="https://goo.gl/ozVH3g">dc motor 550</a></li>
+<li>насос - <a href="https://goo.gl/mpOcAj">Dosing Pump Peristaltic 6v</a></li>
+<li>силиконовая трубка - <a href="https://goo.gl/JK1XgE">silicone tube 4*6</a></li>
+<li>регулятор хода - <a href="https://goo.gl/PVFseq">esc 320a</a></li>
+<li>серво 12кг - <a href="https://goo.gl/dtvxFY">MG995</a></li>
+<li>серво 2.5кг -<a href="https://goo.gl/ZvZ6XO">sg92r</a></li>
+<li>микро-переключатели - <a href="https://goo.gl/X3yiy1">kw11-3z</a></li>
+<li>стабилизатор питания - <a href="https://goo.gl/VeYRaA">ubec 3a</a></li>
+<li>fail-safe - <a href="https://goo.gl/RETgNE">fail safe suit</a></li>
+<li>провода мягкие - <a href="https://goo.gl/QB8Som">awg 18</a></li>
+<li>хомуты на трубки - <a href="https://goo.gl/bGONql">vacuum metal clips 6mm</a></li>
+</ul>
+<p>В хозяйственном магазине или на строительном рынке:</p>
+<ul>
+<li>медная трубка 8мм</li>
+<li>медный провод жесткий 1.5мм</li>
+<li>паяльная кислота + припой</li>
+<li>труба канализационная ПВХ 75мм - 250руб</li>
+<li>листовой пористый ПВХ - 500руб/м²</li>
+<li>шприц Жане - 150руб</li>
+<li>контакты для мягких проводов</li>
+<li>шпильки 6мм</li>
+</ul>
+<h2>Что развивать дальше</h2>
+<ul>
+<li>телеметрия: напряжение, токи, глубина, ориентация</li>
+<li>спасение: буй, детектор воды</li>
+<li>торпеды, ракеты</li>
+<li>3d-печать деталей</li>
+</ul>	
+</section>
+
+
+	<div id="disqus_thread"/>
+<script type="text/javascript">
+    var disqus_shortname = 'imelnikov';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+	</section>
+
+	
+
+	<footer id="footer">
+	<div class="powered">
+	Powered by <a href="https://github.com/melnikov-ivan/tagy">Tagy</a>
+	</div>
+	</footer>
+
+	</div>
+
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/ga.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-56086874-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+	    (function (d, w, c) {
+	        (w[c] = w[c] || []).push(function() {
+	            try {
+	                w.yaCounter33290838 = new Ya.Metrika({
+	                    id:33290838,
+	                    clickmap:true,
+	                    trackLinks:true,
+	                    accurateTrackBounce:true
+	                });
+	            } catch(e) { }
+	        });
+
+	        var n = d.getElementsByTagName("script")[0],
+	            s = d.createElement("script"),
+	            f = function () { n.parentNode.insertBefore(s, n); };
+	        s.type = "text/javascript";
+	        s.async = true;
+	        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+	        if (w.opera == "[object Opera]") {
+	            d.addEventListener("DOMContentLoaded", f, false);
+	        } else { f(); }
+	    })(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/33290838" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	</body>
+</html>

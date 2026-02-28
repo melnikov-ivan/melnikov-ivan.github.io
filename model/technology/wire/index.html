@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Как выбрать сечение провода</title>
+    	<link rel="stylesheet" href="/assets/style.css">
+    	 
+    
+        <meta name="description" content="допустимый ток в awg проводе">
+    
+
+	</head>
+
+	<body class="model">
+	<div id="wrapper">
+
+	
+
+	<header id="header">
+		<div class="logo">
+			<a href="/">
+			Мельников Иван
+			</a>
+		</div>
+
+		<nav>
+			<label for="show-menu" class="show-menu"></label>
+			<input type="checkbox" id="show-menu" role="button"/>
+			<ul id="menu">
+				<li class="nav-model"><a href="/model">Моделизм</a></li>
+				<li class="nav-radio"><a href="/radio">Электроника</a></li>
+				<li class="nav-dev"><a href="/dev">Dev</a></li>
+				<li class="nav-contact"><a href="/contact">Контакты</a></li>
+				<li class="nav-search"><a href="/search">Поиск</a></li>
+			</ul>
+		</nav>
+	</header>
+	<br style="clear:both;"/>
+
+	
+
+	<section id="content">
+
+	
+
+<span itemprop="articleSection">
+<a href="/">Главная</a>
+ 
+	
+	 
+	/ <a href="/model">Моделизм</a>
+	
+
+  
+	
+	 
+	/ <a href="/model/technology">Технологии</a>
+	
+
+   
+</span>
+
+<h1>Как выбрать сечение провода</h1>
+
+
+
+<ul id="tags">
+
+	<li>
+		<a href="/tag/электроника">Электроника</a>
+	</li>	
+
+	<li>
+		<a href="/tag/материалы">Материалы</a>
+	</li>	
+
+	<li>
+		<a href="/tag/теория">Теория</a>
+	</li>	
+
+</ul>
+
+
+
+
+
+<section id="page-content">
+	<p></p>
+<p>Сегодня LiPo-батарее могут выдавать достаточно большие токи. Чтобы сберечь аппаратуру и нервы надо уметь правильно подобрать силовые провода. В интернете много статей для бытовых целей (ремонт в квартирах и пр). Я расскажу как правильно подобрать провода в авиамоделизме.</p>
+<p><img src="/img/technology/wire-800x600.jpg"/></p>
+<p>В моделизме используются медные провода, алюминий слишком жесткий. Рассмотрим разные варианты на примере:</p>
+<ul>
+<li>многожильный провод в ПВХ изоляции (ПВС-2.5)</li>
+<li>акустический кабель</li>
+<li>провод в силиконовой изоляции</li>
+</ul>
+<p>Сам провод состоит из жилы и изоляции.</p>
+<h2>Изоляция</h2>
+<p>Напряжение в проводах является главным критерием при выборе изоляции. Т.к. обычно используются аккумуляторы на 12-20 вольт, такое напряжение считается малым и безопасным - любая изоляция будет достаточной.</p>
+<p>Вторым критерием является термоустойчивость. Самая низкая температура плавления у аккустического кабеля. Вторым по тугоплавкости идет ПВХ изоляция. И самая лучшая термоустойчивость у силиконовой изоляции - до 200°C.</p>
+<h2>Сечение провода</h2>
+<p>Ток протекаующий в проводах определяет какое сечение провода подобрать. Расчитаем ток потребляемый от LiPo-аккумулятора. Например на нем маркировка <code>3s 1300mah 20c</code>. Это значит:</p>
+<ul>
+<li>3s - 3 элемента по 4.2 в, т.е. 12.6 В</li>
+<li>1300mha - ёмкость аккумулятора 1.3Ач</li>
+<li>20с - максимальный ток равен <code>20 x емкость</code>, т.е. 20 * 1.3А = 26 ампер</li>
+</ul>
+<p>Таким образом ныжны провода на 12 вольт и 26 ампер. Грубое правило гласит</p>
+<p><strong>20 ампер на 1мм²</strong></p>
+<p>Значит провод сечением 1.5мм² (<code>S = πD²/4</code>, т.е. D = 1.4мм) будет "с головой".</p>
+<h2>Что такое AWG</h2>
+<p>На проводах от штатных аккумуляторов/регуляторов/моторов часто можно встреть маркировку AWG-16 или AWG-20. AWG - это название американского стандарта проводов (American Wire Gauge). А цифры соответствуют сечению - чем меньше, тем толще провод.</p>
+<p>В таблице приведены сечения для AWG стандарта и допустимый ток.</p>
+<table>
+<thead><tr>
+<th>Ток, А</th>
+<th>Сечение, мм²</th>
+<th>AWG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16.5</td>
+<td>0.5</td>
+<td>20</td>
+</tr>
+<tr>
+<td>21.5</td>
+<td>0.75</td>
+<td>18</td>
+</tr>
+<tr>
+<td>25.0</td>
+<td>1.0</td>
+<td>17</td>
+</tr>
+<tr>
+<td>32.0</td>
+<td>1.5</td>
+<td>15</td>
+</tr>
+<tr>
+<td>43.5</td>
+<td>2.5</td>
+<td>13</td>
+</tr>
+<tr>
+<td>58.5</td>
+<td>4.0</td>
+<td>11</td>
+</tr>
+<tr>
+<td>77.0</td>
+<td>6.0</td>
+<td>9</td>
+</tr>
+<tr>
+<td>103.0</td>
+<td>10.0</td>
+<td>7</td>
+</tr>
+<tr>
+<td>142.5</td>
+<td>16.0</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>Не забывайте переводить площадь сечения в диаметр!</p>
+<p>Читайте также как сделать <a href="/model/tool/charger/">блок питания на 12 вольт/10 ампер</a> и выбрать <a href="/model/tool/foamcut/">сечение нихромовой проволоки</a> для пенорезки.</p>	
+</section>
+
+
+	<div id="disqus_thread"/>
+<script type="text/javascript">
+    var disqus_shortname = 'imelnikov';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+	</section>
+
+	
+
+	<footer id="footer">
+	<div class="powered">
+	Powered by <a href="https://github.com/melnikov-ivan/tagy">Tagy</a>
+	</div>
+	</footer>
+
+	</div>
+
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/ga.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-56086874-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+	    (function (d, w, c) {
+	        (w[c] = w[c] || []).push(function() {
+	            try {
+	                w.yaCounter33290838 = new Ya.Metrika({
+	                    id:33290838,
+	                    clickmap:true,
+	                    trackLinks:true,
+	                    accurateTrackBounce:true
+	                });
+	            } catch(e) { }
+	        });
+
+	        var n = d.getElementsByTagName("script")[0],
+	            s = d.createElement("script"),
+	            f = function () { n.parentNode.insertBefore(s, n); };
+	        s.type = "text/javascript";
+	        s.async = true;
+	        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+	        if (w.opera == "[object Opera]") {
+	            d.addEventListener("DOMContentLoaded", f, false);
+	        } else { f(); }
+	    })(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/33290838" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	</body>
+</html>

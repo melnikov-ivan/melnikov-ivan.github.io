@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Поиск по сайту</title>
+
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="/assets/main.css">
+</head>
+
+<body class="search">
+    <div id="wrapper">
+
+        <header id="header">
+            <div class="logo">
+                <a href="/">
+                Мельников Иван
+                </a>
+            </div>
+    
+            <nav>
+                <label for="show-menu" class="show-menu"></label>
+                <input type="checkbox" id="show-menu" role="button"/>
+                <ul id="menu">
+                    <li class="nav-model"><a href="/model">Моделизм</a></li>
+                    <li class="nav-radio"><a href="/radio">Электроника</a></li>
+                    <li class="nav-dev"><a href="/dev">Dev</a></li>
+                    <li class="nav-contact"><a href="/contact">Контакты</a></li>
+                    <li class="nav-search"><a href="/search">Поиск</a></li>
+                </ul>
+            </nav>
+        </header>
+        <br style="clear:both;"/>
+
+        <section id="content">
+        <h1>Поиск</h1>
+
+    <div class="ya-site-form ya-site-form_inited_no" onclick="return {'action':'http://imelnikov.ru/search','arrow':false,'bg':'transparent','fontsize':12,'fg':'#000000','language':'ru','logo':'rb','publicname':'imelnikov.ru','suggest':true,'target':'_self','tld':'ru','type':2,'usebigdictionary':true,'searchid':2292658,'input_fg':'#000000','input_bg':'#ffffff','input_fontStyle':'normal','input_fontWeight':'normal','input_placeholder':'Найти','input_placeholderColor':'#AAAAAA','input_borderColor':'#7f9db9'}">
+        <form action="https://yandex.ru/search/site/" method="get" target="_self" accept-charset="utf-8">
+            <input type="hidden" name="searchid" value="2292658"/>
+            <input type="hidden" name="l10n" value="ru"/>
+            <input type="hidden" name="reqenc" value=""/>
+            <input type="search" name="text" value=""/>
+            <input type="submit" value="Найти"/>
+        </form>
+    </div>
+    <style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style>
+    <script type="text/javascript">
+        (function(w,d,c){
+            var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;
+            if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';
+            s.async=true;s.charset='utf-8';
+            s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';
+            h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})
+        })(window,document,'yandex_site_callbacks');
+    </script>
+
+
+    <div id="ya-site-results" onclick="return {'tld': 'ru','language': 'ru','encoding': '','htmlcss': '1.x','updatehash': true}"></div>
+    <script type="text/javascript">
+        (function(w,d,c){
+            var s=d.createElement('script'),h=d.getElementsByTagName('script')[0];
+            s.type='text/javascript';
+            s.async=true;
+            s.charset='utf-8';
+            s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';
+            h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Results.init();})
+        })(window,document,'yandex_site_callbacks');
+    </script>
+
+
+        </section>
+    </div>
+
+</body>
+</html>

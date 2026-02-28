@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Программа для чертежей самолетов</title>
+    	<link rel="stylesheet" href="/assets/style.css">
+    	 
+    
+        <meta name="description" content="Чертеж модели на компьютере">
+    
+
+	</head>
+
+	<body class="model">
+	<div id="wrapper">
+
+	
+
+	<header id="header">
+		<div class="logo">
+			<a href="/">
+			Мельников Иван
+			</a>
+		</div>
+
+		<nav>
+			<label for="show-menu" class="show-menu"></label>
+			<input type="checkbox" id="show-menu" role="button"/>
+			<ul id="menu">
+				<li class="nav-model"><a href="/model">Моделизм</a></li>
+				<li class="nav-radio"><a href="/radio">Электроника</a></li>
+				<li class="nav-dev"><a href="/dev">Dev</a></li>
+				<li class="nav-contact"><a href="/contact">Контакты</a></li>
+				<li class="nav-search"><a href="/search">Поиск</a></li>
+			</ul>
+		</nav>
+	</header>
+	<br style="clear:both;"/>
+
+	
+
+	<section id="content">
+
+	
+
+<span itemprop="articleSection">
+<a href="/">Главная</a>
+ 
+	
+	 
+	/ <a href="/model">Моделизм</a>
+	
+
+  
+	
+	 
+	/ <a href="/model/tool">Инструменты</a>
+	
+
+   
+</span>
+
+<h1>Программа для чертежей самолетов</h1>
+
+
+
+<ul id="tags">
+
+	<li>
+		<a href="/tag/чертеж">Чертеж</a>
+	</li>	
+
+	<li>
+		<a href="/tag/программа">Программа</a>
+	</li>	
+
+	<li>
+		<a href="/tag/полукопия">Полукопия</a>
+	</li>	
+
+</ul>
+
+
+
+
+
+<section id="page-content">
+	<p></p>
+<p><img src="/img/drafts/drafts-500-500x500.png"/></p>
+<p>При постройке даже маленькой модели чертеж просто незаменим. Обычно он хранятся в виде нарезки шаблонов (так называемой лапши), по которым потом вырезается деталь. При этом оригинал хранится в виде картинки. У этого подхода есть несколько больших минусов. Картинки тяжело приводить к нужному масштабу при печати. Их нельзя редактировать, если хочется что-то поменять. А распечатанные в нужном масштабе чертежи нельзя перекинуть другу по электронной почте. У всех этих проблем есть решение: чертеж модели на компьютере.</p>
+<p>Я сам долго не подходил к программам проектирования, боялся их сложности, думал, что усилия не стоят результата на маленьких моделях. Но всё это не так. Я раскажу вам, как сделать чертеж модели с фотографии оригинала, выполнить сразу в заданном масштабе и распечатать в нужном размере.</p>
+<h2>Как сделать чертеж модели на компьютере</h2>
+<p>Для примера пропробуем создать модель полукопию. За основу возьмем картинку в высоком разрешении с общим планом самолета и сечениями. Затем переведем ее в электронный вид. Отмасштабируем до нужных расмеров, это поможет понимать реальное расположение внутренних элементов. Добавим к чертежу двигатель и мотораму. И в конце выгрузим в pdf-файл в натуральную величину.</p>
+<h3>Какая программа лучше для моделирования</h3>
+<p>Нам понадобится программа для 2D моделирования. Из функционала необходимы слои (они позволяют скрывать части чертежа и разграничивать уровни детализации) и рисование прямых/окружностей (собственно для создания модели).</p>
+<p>Безусловно, платные версии CAD-приложений (САПР) обладают большим количеством функций. Но для наших целей хватит возможностей практически любой бесплатной программы. А вот возможности экспорта и печати могут различаться весьма значительно. Из бесплатных в итоге приемлемый результат удалось получить с помощью программ <a href="http://www.ribbonsoft.com/en">QCAD</a> и <a href="http://www.sketchup.com">SketchUp</a>. Они доступны для всех операционных систем: Windows, Unix, MacOS.</p>
+<h3>QCAD</h3>
+<p>Имеет бесплатную версию, платная стоит 30$. Поддерживает распространенные форматы DXF и DWG. Интерфейс на русском языке. Функция печати на некскольких листах реализована в версии PRO, которая доступна в бесплатной версии 20 минут, затем требует перезагрузки.</p>
+<h3>SketchUp</h3>
+<p>Имеет бесплатную версию. Поддержка форматов DXF только в платной версии (500$), собственный формат <code>.skp</code>. Поддерживает многостраничную печать. Существует центральная платформа для хранения моделей, куда можно выгружать свои модели, загружать чужие. Это очень здорово! Также SketchUp поддеживает возможность 3-х мерного проектирования.</p>
+<p>Дальше будем рассмотривать работу в программе QCAD, т.к. она поддерживает распространенный формат DXF, в то время как формат SKP пока еще не очень стабилен.</p>
+<h2>Оригинальный чертеж, масштаб</h2>
+<p>загружаем картинку, приводим к заданному размеру. Создаем электронную версию чертежа</p>
+<h2>Редактирование</h2>
+<p>Создаем доп слои, редактируем.</p>
+<h2>Печать чертежа в масштабе</h2>
+<p>Как распечатать чертеж в натуральную величину?</p>
+<p><a href="/model/draft">Чертежи моделей</a> можно найти в отдельном разделе.</p>	
+</section>
+
+
+	<div id="disqus_thread"/>
+<script type="text/javascript">
+    var disqus_shortname = 'imelnikov';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+	</section>
+
+	
+
+	<footer id="footer">
+	<div class="powered">
+	Powered by <a href="https://github.com/melnikov-ivan/tagy">Tagy</a>
+	</div>
+	</footer>
+
+	</div>
+
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/ga.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-56086874-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+	    (function (d, w, c) {
+	        (w[c] = w[c] || []).push(function() {
+	            try {
+	                w.yaCounter33290838 = new Ya.Metrika({
+	                    id:33290838,
+	                    clickmap:true,
+	                    trackLinks:true,
+	                    accurateTrackBounce:true
+	                });
+	            } catch(e) { }
+	        });
+
+	        var n = d.getElementsByTagName("script")[0],
+	            s = d.createElement("script"),
+	            f = function () { n.parentNode.insertBefore(s, n); };
+	        s.type = "text/javascript";
+	        s.async = true;
+	        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+	        if (w.opera == "[object Opera]") {
+	            d.addEventListener("DOMContentLoaded", f, false);
+	        } else { f(); }
+	    })(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/33290838" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	</body>
+</html>

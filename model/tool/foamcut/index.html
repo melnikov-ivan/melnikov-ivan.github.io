@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Резка пенопласта нихромом</title>
+    	<link rel="stylesheet" href="/assets/style.css">
+    	 
+    
+        <meta name="description" content="Как подобрать нихромовую проволоку">
+    
+
+	</head>
+
+	<body class="model">
+	<div id="wrapper">
+
+	
+
+	<header id="header">
+		<div class="logo">
+			<a href="/">
+			Мельников Иван
+			</a>
+		</div>
+
+		<nav>
+			<label for="show-menu" class="show-menu"></label>
+			<input type="checkbox" id="show-menu" role="button"/>
+			<ul id="menu">
+				<li class="nav-model"><a href="/model">Моделизм</a></li>
+				<li class="nav-radio"><a href="/radio">Электроника</a></li>
+				<li class="nav-dev"><a href="/dev">Dev</a></li>
+				<li class="nav-contact"><a href="/contact">Контакты</a></li>
+				<li class="nav-search"><a href="/search">Поиск</a></li>
+			</ul>
+		</nav>
+	</header>
+	<br style="clear:both;"/>
+
+	
+
+	<section id="content">
+
+	
+
+<span itemprop="articleSection">
+<a href="/">Главная</a>
+ 
+	
+	 
+	/ <a href="/model">Моделизм</a>
+	
+
+  
+	
+	 
+	/ <a href="/model/tool">Инструменты</a>
+	
+
+   
+</span>
+
+<h1>Резка пенопласта нихромом</h1>
+
+
+
+<ul id="tags">
+
+	<li>
+		<a href="/tag/электроника">Электроника</a>
+	</li>	
+
+	<li>
+		<a href="/tag/теория">Теория</a>
+	</li>	
+
+</ul>
+
+
+
+
+
+<section id="page-content">
+	<p>Среди любимых технологий моделистов пенопласт занимает важное место. Он прост в обработке, легкий и в меру прочный. Цельные крылья из пенопласта различной плотности используются в <a href="/model/mig-3">моделях воздушного боя</a>. Для их изготовления требуется специальный резак - <strong>пенорезка</strong>. По сути это нихромовая проволока разогретая под действием электрического тока.</p>
+<p>Конструктивные решения каждый моделист может принять сам. Я хочу рассказать как определиться с параметрами проволоки и блока питания.</p>
+<h2>Как подобрать диаметр и напряжение</h2>
+<p>Самое главное, что нужно знать, это зависимость величины тока от диаметра нихромовой проволоки, необходимая для ее разогрева. В таблице представлены данные для температуры 700 градусов (пенопласт плавится при ~250 градусов Цельсия).</p>
+<table>
+<thead><tr>
+<th>Диаметр, мм</th>
+<th>Ток, А</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1,0</td>
+<td>12,1</td>
+</tr>
+<tr>
+<td>0,9</td>
+<td>10,45</td>
+</tr>
+<tr>
+<td>0,8</td>
+<td>9,15</td>
+</tr>
+<tr>
+<td>0,75</td>
+<td>8,4</td>
+</tr>
+<tr>
+<td>0,7</td>
+<td>7,8</td>
+</tr>
+<tr>
+<td>0,65</td>
+<td>7,15</td>
+</tr>
+<tr>
+<td>0,6</td>
+<td>6,5</td>
+</tr>
+<tr>
+<td>0,55</td>
+<td>5,8</td>
+</tr>
+<tr>
+<td>0,5</td>
+<td>5,2</td>
+</tr>
+<tr>
+<td>0,45</td>
+<td>4,45</td>
+</tr>
+<tr>
+<td>0,4</td>
+<td>3,85</td>
+</tr>
+<tr>
+<td>0,35</td>
+<td>3,3</td>
+</tr>
+<tr>
+<td>0,3</td>
+<td>2,7</td>
+</tr>
+<tr>
+<td>0,25</td>
+<td>2,15</td>
+</tr>
+<tr>
+<td>0,2</td>
+<td>1,65</td>
+</tr>
+<tr>
+<td>0,15</td>
+<td>1,15</td>
+</tr>
+<tr>
+<td>0,1</td>
+<td>0,72</td>
+</tr>
+</tbody>
+</table>
+<p>У меня есть <a href="/model/tool/charger">блок питания на 12В</a> и несколько кусочков нихрома разного диаметра. Поэтому я буду отталкиваться от напряжения. Хочется получить резак около 50-60 см длиной, чтобы удобно было вырезать консоли крыльев.</p>
+<h2>Выбор диаметра при фиксированном напряжении</h2>
+<p>Посчитаем длину проволоки для разных диаметров.</p>
+<h3>D=0.3мм</h3>
+<p>Требуется ток 2.7А (см таблицу выше). Сопротивление проволоки должно быть</p>
+<pre><code>    R = U / I; 
+    R = 12В / 2.7А = 4.4 Ом
+</code></pre>
+<p>Удельное сопротивление нихрома p = 1.1 Ом мм²/м. Чтобы получить требуемую длину проволоки</p>
+<pre><code>    L = S * R / p; S - площадь сечения в мм², S = Pi * D * D / 4;
+    L = 0.07 * 4.4 / 1.1 = 0.28м
+</code></pre>
+<p>Получается достаточно коротко, хочется длиннее. Попробуем взять проволоку потолще.</p>
+<h3>D=0.5мм</h3>
+<p>Для разогрева потребуется ток 5.2А (см первую таблицу). Сопротивление R = 2.3 Ом. Длина равна</p>
+<pre><code>    L = 0.20 * 2.3 / 1.1 = 0.41 м
+</code></pre>
+<p>Уже ближе. Для удобства приведу расчеты для других диаметров.</p>
+<ul>
+<li>0.6мм - 47см (6.5А)</li>
+<li>0.7мм - 54см (7.8А)</li>
+<li>0.8мм - 60см (9.2А)</li>
+<li>0.9мм - 67см (10.5А)</li>
+<li>1.0мм - 71см (12.1А)</li>
+</ul>
+<p>Мой <a href="/model/tool/charger">блок питания</a> держит ток до 15 ампер, так что все подходят.</p>
+<h2>Выбор напряжения при фиксированном диаметре</h2>
+<p>Предположим у нас есть проволока одного диаметра, и нужно выбрать блок питания под нее. Возьмем проволоку 0.3мм. Найдем напряжение требуемое для разогрева кусочка длиной 0.5м.</p>
+<pre><code>    U = I * R;
+    R = L * p / S;
+
+    Тогда 
+    U = I * L * p / S;
+    U = 2.7 * 0.5 * 1.1 / 0.12 = 21 В
+</code></pre>
+<p>Таким образом чтобы разогреть проволоку нам понадобится источник питания на 20В (ток 2.7А). Блоки питания от ноутбуков имеют сходные параметры, можно использовать их.</p>
+<h2>Выводы</h2>
+<p>Если проволока не греется, то нужно увеличивать ток.</p>
+<ul>
+<li>Увеличиваем напряжение - при постоянном сопротивлении (наш кусок проволоки), ток тоже увеличится. </li>
+<li>Уменьшаем сопротивление - при постоянном напряжении, ток увеличится. Сопротивление уменьшается путем увеличения диаметра (электронам проще протекать через толстое сечение), либо укорачивая длину.</li>
+</ul>
+<h2>Где взять проволоку</h2>
+<ul>
+<li>В паяльниках очень тонкая проволока ~0.1мм</li>
+<li>Мощные нагреватели имеют более толстые проволоки 0.3-0.5мм</li>
+<li>На рынке от 50 рублей за катушку до 50 рублей за метр, зависит от наглости продавца )</li>
+</ul>
+<p>Читайте также как подобрать <a href="/model/technology/wire/">сечение проводов под аккумулятор</a>.</p>	
+</section>
+
+
+	<div id="disqus_thread"/>
+<script type="text/javascript">
+    var disqus_shortname = 'imelnikov';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+	</section>
+
+	
+
+	<footer id="footer">
+	<div class="powered">
+	Powered by <a href="https://github.com/melnikov-ivan/tagy">Tagy</a>
+	</div>
+	</footer>
+
+	</div>
+
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/ga.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-56086874-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+	    (function (d, w, c) {
+	        (w[c] = w[c] || []).push(function() {
+	            try {
+	                w.yaCounter33290838 = new Ya.Metrika({
+	                    id:33290838,
+	                    clickmap:true,
+	                    trackLinks:true,
+	                    accurateTrackBounce:true
+	                });
+	            } catch(e) { }
+	        });
+
+	        var n = d.getElementsByTagName("script")[0],
+	            s = d.createElement("script"),
+	            f = function () { n.parentNode.insertBefore(s, n); };
+	        s.type = "text/javascript";
+	        s.async = true;
+	        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+	        if (w.opera == "[object Opera]") {
+	            d.addEventListener("DOMContentLoaded", f, false);
+	        } else { f(); }
+	    })(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/33290838" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Датчик уровня воды на Arduino</title>
+    	<link rel="stylesheet" href="/assets/style.css">
+    	 
+    
+        <meta name="description" content="Схема датчика уровня воды MPXV5050 на Arduino">
+    
+
+	</head>
+
+	<body class="radio">
+	<div id="wrapper">
+
+	
+
+	<header id="header">
+		<div class="logo">
+			<a href="/">
+			Мельников Иван
+			</a>
+		</div>
+
+		<nav>
+			<label for="show-menu" class="show-menu"></label>
+			<input type="checkbox" id="show-menu" role="button"/>
+			<ul id="menu">
+				<li class="nav-model"><a href="/model">Моделизм</a></li>
+				<li class="nav-radio"><a href="/radio">Электроника</a></li>
+				<li class="nav-dev"><a href="/dev">Dev</a></li>
+				<li class="nav-contact"><a href="/contact">Контакты</a></li>
+				<li class="nav-search"><a href="/search">Поиск</a></li>
+			</ul>
+		</nav>
+	</header>
+	<br style="clear:both;"/>
+
+	
+
+	<section id="content">
+
+	
+
+<span itemprop="articleSection">
+<a href="/">Главная</a>
+ 
+	
+	 
+	/ <a href="/radio">Электроника</a>
+	
+
+   
+</span>
+
+<h1>Датчик уровня воды на Arduino</h1>
+
+
+
+<ul id="tags">
+
+	<li>
+		<a href="/tag/электроника">Электроника</a>
+	</li>	
+
+	<li>
+		<a href="/tag/arduino">Arduino</a>
+	</li>	
+
+	<li>
+		<a href="/tag/сенсор">Сенсор</a>
+	</li>	
+
+	<li>
+		<a href="/tag/для дома">Для Дома</a>
+	</li>	
+
+</ul>
+
+
+
+
+
+<section id="page-content">
+	<p></p>
+<p>Датчик уровня воды будет использоваться в бане в емкостях для холодной и горячей воды. Устройство расчитано на глубину до 5 метров и имеет точность 0,5 см. Основой является датчик давления <strong>MPXV5050</strong> расчитанный на 50кПа. Это эквивалентно водяному столбу высотой 5 метров.</p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/4P8_2uUOIjI" frameborder="0" allowfullscreen></iframe></p>
+<h2>Принцип действия</h2>
+<p>Обычно датчик монтурют внизу бочки, сверлят отверстие и навинчивают штуцер. Но если не хочется сверлить бочку и возиться с герметизацией, то можно поступить другим способом.</p>
+<p><img src="/img/radio/water.png" alt="Подключение датчика уровня воды на Ардуино"></p>
+<p>В воду опускается медная трубка маленького диаметра почти до самого дна. Нижний срез открыт, а к верхнему подключается датчик давления. В итоге датчик фиксирует давление водяного столба на нижнем срезе трубы. <code>1 кПа = 10 см</code></p>
+<p>На самом деле воздух сжимается и вода немного заходит внутрь трубы. Поэтому датчик будет фиксировать давление не по нижнему срезу трубы, а по вровню <code>H1</code>. Но т.к. мы знаем на сколько увеличилось давление внутри трубы по сравнению с атмосферным, то можно точно вычислить высоту эту поправку. Нужно</p>
+<ul>
+<li>чтобы труба была постоянного сечения</li>
+<li>знать длину трубы</li>
+</ul>
+<pre><code>P - измеренное давление внутри турбы.
+Pa - изначальное атмосферное давление
+
+Т.к.  кол-во воздуха в трубе не меняется, а температуру считаем постоянной, то
+
+Pa * V1 = P * V2       
+, где 
+V1 - изначальный обхем воздуха
+V2 - объем после погружения
+
+Т.к. сечение (площадь) трубы постоянно, то можно перейти к длинам.
+
+Pa * L1 = P * L2
+, где 
+L1 - длина всей трубы 
+L2 - длина трубы от сенсора до H1
+
+L2 = (Pa * L)/P
+</code></pre>
+<p>Посчитаем, на сколько сожмется воздух если опустить трубку длиной 1 метр, на глубину 1 метр. Атмосферное давление 100кПа. Давление водяного столба высотой 1 метра равено 10кПа (плюс атмосфера сверху, итого 110 кПа). Получаем:</p>
+<pre><code>L2 = (100*1м)/(100 + 10) = 0.9 м
+</code></pre>
+<p>Т.е. вода зайдет на 10 см.</p>
+<p>Но хватит теории, давайте к практике.</p>
+<h2>Подключение MPXV5050 к Arduino</h2>
+<h3>Datasheet</h3>
+<ul>
+<li><a href="/file/radio/mpxv5050gp.pdf">MPXV5050</a></li>
+</ul>
+<h3>Пины</h3>
+<ul>
+<li>2 - Vcc</li>
+<li>3 - Gnd</li>
+<li>4 - Signal</li>
+</ul>
+<h3>Скетч</h3>
+<pre><code>double L = 100.0; // длина трубки в см
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  double p = analogRead(A0);
+
+  // Давление водяного столба в кПа
+  double h = (p/1024 - 0.04)/0.018; // kPa
+
+  // Расчитываем поправку в см
+  // double l = L - L * 100 / (100 + h);
+  double l = L * h / (100 + h); 
+
+  double total = h * 10 + l;
+  Serial.println(total); 
+}
+</code></pre>
+<h2>Ссылки</h2>
+<ul>
+<li><a href="https://goo.gl/opZL0A">MPXV5050</a></li>
+<li><a href="https://github.com/melnikov-ivan/arduino-pressure">Проект на github</a></li>
+</ul>	
+</section>
+
+
+	<div id="disqus_thread"/>
+<script type="text/javascript">
+    var disqus_shortname = 'imelnikov';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+	</section>
+
+	
+
+	<footer id="footer">
+	<div class="powered">
+	Powered by <a href="https://github.com/melnikov-ivan/tagy">Tagy</a>
+	</div>
+	</footer>
+
+	</div>
+
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/ga.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-56086874-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+	    (function (d, w, c) {
+	        (w[c] = w[c] || []).push(function() {
+	            try {
+	                w.yaCounter33290838 = new Ya.Metrika({
+	                    id:33290838,
+	                    clickmap:true,
+	                    trackLinks:true,
+	                    accurateTrackBounce:true
+	                });
+	            } catch(e) { }
+	        });
+
+	        var n = d.getElementsByTagName("script")[0],
+	            s = d.createElement("script"),
+	            f = function () { n.parentNode.insertBefore(s, n); };
+	        s.type = "text/javascript";
+	        s.async = true;
+	        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+	        if (w.opera == "[object Opera]") {
+	            d.addEventListener("DOMContentLoaded", f, false);
+	        } else { f(); }
+	    })(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/33290838" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	</body>
+</html>

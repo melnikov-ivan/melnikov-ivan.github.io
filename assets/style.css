@@ -1,0 +1,402 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+html { -webkit-text-size-adjust: none; }
+
+body {
+	font-family: arial,chaparral-pro,Georgia,"Times New Roman",Times,serif;
+	font-size: 16px;
+	color: #444;
+	background: #fff;
+	width: 100%;
+ 	min-width: 1000px;
+	background: #fff;
+}
+
+html, body {
+	height: 100%;
+}
+
+#wrapper {
+	min-height: 100%;
+	position: relative;
+}
+
+#header {
+	width: 1020px;
+	margin: 0 auto;
+}
+
+#content {
+	max-width: 1120px;
+	margin: 20px auto;
+	line-height: 21px;
+	padding-bottom: 50px
+}
+
+#footer {
+	height: 30px;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+
+a:link,
+a:visited {
+	text-decoration: none;
+	color: #df4747;
+}
+a:hover, a:focus {
+    color: #900;
+}
+
+div.logo {
+	float: left;
+	margin: 10px 20px 5px 0;
+}
+div.logo a {
+	text-decoration: none;
+	font-size: 2.1em;
+	color: #000;
+	padding: 10px;
+}
+
+
+/* Главное меню */
+
+.show-menu {
+    display: none;
+    float: left;
+    background: url(/assets/icon-menu-orange.png) no-repeat;
+    background-size: 50px 50px;
+    width: 50px;
+    height: 50px;
+}
+
+/*Hide checkbox*/
+input[type=checkbox]{
+    display: none;
+}
+
+/*Show menu when invisible checkbox is checked*/
+input[type=checkbox]:checked ~ #menu{
+    display: block;
+}
+
+
+nav ul {
+	list-style: none;
+
+}
+nav ul li {
+	float: left;
+	padding: 26px 10px 10px;
+	font-weight: 300;
+    text-transform: uppercase;
+}
+
+nav ul li a, 
+nav ul li a:visited {
+	color: #b2b2b2;
+	padding: 15px 10px;
+	transition: border .2s ease;
+}
+nav ul li a:hover,
+nav ul li a:focus {
+	border-top: 5px solid #df4747;
+	background: none;
+	color: #555;
+}
+/* Подсвечиваем текущий раздел */
+.model .nav-model a,
+.radio .nav-radio a, 
+.dev .nav-dev a,
+.search .nav-search a,
+.contact .nav-contact a {
+	border-top: 5px solid #df4747;
+	background: none;
+	color: #555;
+}
+
+::selection {
+	color: #fff;
+	color: rgba(255,255,255,.85);
+	background: #df4747;
+}
+
+/*Responsive Styles*/
+
+@media screen and (max-width : 760px) {
+    body {
+        min-width: 400px;
+    }
+
+    #header {
+        width: 100%;
+    }
+
+    /*Make dropdown links appear inline*/
+    nav ul {
+        position: static;
+        display: none;
+        width: 100%;
+    }
+    /*Create vertical spacing*/
+    nav li {
+        margin-bottom: 1px;
+        border-bottom: 1px solid gray;
+    }
+    /*Make all menu links full width*/
+    nav ul li, nav li a {
+        width: 100%;
+        border-top: none;
+    }
+
+    /* Подсвечиваем наведение */
+    nav ul li a:hover,
+    nav ul li a:focus {
+        border-top: 0;
+        background: none;
+        color: #555;
+    }
+
+    /* Подсвечиваем текущий раздел */
+    .model .nav-model a,
+    .radio .nav-radio a, 
+    .dev .nav-dev a,
+    .contact .nav-contact a {
+        border-top: 0;
+        background: none;
+        color: #555;
+    }
+
+    /*Display 'show menu' link*/
+    .show-menu {
+        display: block;
+    }
+
+
+    #content {
+        width: 90%;
+    }
+}
+
+
+
+h1 {
+	font-size: 45px;
+	line-height: 45px;
+	margin: 10px 0;
+}
+h2 {
+	font-size: 35px;
+	line-height: 35px;
+	margin: 20px 0 10px;
+}
+h3 {
+	font-size: 25px;
+	line-height: 25px;
+	margin: 15px 0 5px;
+}
+
+p {
+	margin: 10px 0;
+}
+
+#tags {
+	font-size: 12px !important;
+	clear: both;
+	font-family: facitweb,"Lucida Grande","Lucida Sans Unicode","Lucida Sans",Arial,sans-serif;
+}
+
+#tags:after {
+content: ".";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
+}
+
+#tags li a {
+	float: left;
+	padding: 2px 10px;
+	margin: 5px 8px 5px 0;
+	background: #eee;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	-o-border-radius: 12px;
+	-ms-border-radius: 12px;
+	border-radius: 12px;
+}
+
+#tags a {
+	color: #666;
+	webkit-transition: background-color .2s ease !important;
+	-moz-transition: background-color .2s ease !important;
+	-o-transition: background-color .2s ease !important;
+	-ms-transition: background-color .2s ease !important;
+	transition: background-color .2s ease !important;
+	-webkit-transition: color .2s ease;
+	-moz-transition: color .2s ease;
+	-o-transition: color .2s ease;
+	-ms-transition: color .2s ease;
+	transition: color .2s ease;
+}
+#tags a:hover, #tags a:focus {
+    color: #fff;
+    background: #df4747;
+}
+
+table th,td {
+	padding: 2px 5px;
+}
+
+
+section#page-content {
+	margin-bottom: 30px;
+}
+
+section#page-content ul {
+	list-style-type: circle;
+	margin: 10px 0;
+	padding-left: 30px;
+}
+
+section#page-content img {
+	max-width: 100%;
+}
+
+section#page-content code, pre {
+    font-family: consolas, monaco;
+    font-size: 0.9em;
+    padding: 2px;
+    overflow: auto;  
+    white-space: pre;
+    background: #f8f8f8; 
+}
+
+section#page-content strong {
+    font-weight: bold;
+}
+
+section#page-content em {
+    font-style: italic;
+}
+
+/* /model navigation */
+.model-categories {
+	float: right;
+    border-top: 2px solid #aaa;
+    padding: 7px;
+}
+
+@media screen and (max-width : 760px) {
+    .model-categories {
+        float: none;
+        border-top: none;
+        border-bottom: 2px solid #aaa;
+        padding: 0px 0px 8px;
+    }
+    .model-categories ul li {
+        display: inline-block;
+        padding-left: 5px;
+    }
+}
+
+div.cover img {
+    max-width: 100%;
+}
+
+.contact #content img {
+    vertical-align: middle;
+}
+
+.contact .email-form {
+    display: block;
+    width: 400px;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.email-form input, .email-form textarea {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    margin: 0.5em;
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 0.9em;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.contact .email-form button {
+    display: block;
+    margin: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    border: 2px solid #df4747;
+    color: #df4747;
+    background: transparent;
+    line-height: 1em;
+    padding: 0.6em 0.9em;
+    transition: all 0.3s ease-in-out;
+}
+
+@media screen and (max-width : 760px) {
+    .contact .email-form {
+        min-width: 290px;
+        width: 100%;
+        margin: 0px;
+    }
+}
+
+.powered {
+	position: absolute;
+	right: 40px;
+}
+

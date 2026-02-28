@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Телеметрия</title>
+    	<link rel="stylesheet" href="/assets/style.css">
+    	 
+    
+
+	</head>
+
+	<body class="radio">
+	<div id="wrapper">
+
+	
+
+	<header id="header">
+		<div class="logo">
+			<a href="/">
+			Мельников Иван
+			</a>
+		</div>
+
+		<nav>
+			<label for="show-menu" class="show-menu"></label>
+			<input type="checkbox" id="show-menu" role="button"/>
+			<ul id="menu">
+				<li class="nav-model"><a href="/model">Моделизм</a></li>
+				<li class="nav-radio"><a href="/radio">Электроника</a></li>
+				<li class="nav-dev"><a href="/dev">Dev</a></li>
+				<li class="nav-contact"><a href="/contact">Контакты</a></li>
+				<li class="nav-search"><a href="/search">Поиск</a></li>
+			</ul>
+		</nav>
+	</header>
+	<br style="clear:both;"/>
+
+	
+
+	<section id="content">
+
+	
+
+<span itemprop="articleSection">
+<a href="/">Главная</a>
+ 
+	
+	 
+	/ <a href="/radio">Электроника</a>
+	
+
+   
+</span>
+
+<h1>Телеметрия</h1>
+
+
+
+<ul id="tags">
+
+	<li>
+		<a href="/tag/arduino">Arduino</a>
+	</li>	
+
+	<li>
+		<a href="/tag/электроника">Электроника</a>
+	</li>	
+
+	<li>
+		<a href="/tag/радиоуправление">Радиоуправление</a>
+	</li>	
+
+</ul>
+
+
+
+
+
+<section id="page-content">
+	<p><em>Страница в разработке</em></p>
+<p><em>Посмотрите другие статьи в разделе <a href="/radio">Электроника</a></em></p>
+<h1>Напряжение</h1>
+<pre><code class="lang-c">int analogInput = A0;
+float vout = 0.0;
+float vin = 0.0;
+float R1 = 30000.0; //  
+float R2 = 7500.0; // 
+int value = 0;
+void setup(){
+   pinMode(analogInput, INPUT);
+   Serial.begin(9600);
+   Serial.print(&quot;DC VOLTMETER&quot;);
+}
+void loop(){
+   // read the value at analog input
+   value = analogRead(analogInput);
+   vout = (value * 5.0) / 1024.0; // see text
+   vin = vout / (R2/(R1+R2)); 
+
+Serial.print(&quot;INPUT V= &quot;);
+Serial.println(vin,2);
+delay(500);
+}
+</code></pre>
+<h1>Глубина</h1>
+<pre><code class="lang-c">// http://playground.arduino.cc/Code/NewPing
+
+#include &lt;NewPing.h&gt;
+
+#define TRIGGER_PIN  12
+#define ECHO_PIN     11
+#define MAX_DISTANCE 200
+
+NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  delay(50);
+  Serial.print(&quot;Ping: &quot;);
+  Serial.print(sonar.ping_cm());
+  Serial.println(&quot;cm&quot;);
+}
+</code></pre>
+<h2>Примеры кода</h2>
+<ul>
+<li><a href="https://edwardmallon.wordpress.com/">Подводный аппарат</a></li>
+<li><a href="http://envirodiy.org/ultrasonic-water-depth-sensor/">MaxBotix</a></li>
+<li><a href="https://github.com/jeroendoggen/Arduino-distance-sensor-library/blob/master/DistanceSensor/DistanceSRF04.cpp">Библиотека</a></li>
+<li><a href="http://www.tigoe.com/pcomp/code/arduinowiring/17/">pulseIn</a></li>
+<li><a href="https://www.robot-electronics.co.uk/htm/srf05tech.htm">Теория</a></li>
+<li><a href="http://arduinobasics.blogspot.ru/2012/11/arduinobasics-hc-sr04-ultrasonic-sensor.html">Просто</a></li>
+</ul>	
+</section>
+
+
+
+
+
+
+
+	</section>
+
+	
+
+	<footer id="footer">
+	<div class="powered">
+	Powered by <a href="https://github.com/melnikov-ivan/tagy">Tagy</a>
+	</div>
+	</footer>
+
+	</div>
+
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/ga.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-56086874-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+	    (function (d, w, c) {
+	        (w[c] = w[c] || []).push(function() {
+	            try {
+	                w.yaCounter33290838 = new Ya.Metrika({
+	                    id:33290838,
+	                    clickmap:true,
+	                    trackLinks:true,
+	                    accurateTrackBounce:true
+	                });
+	            } catch(e) { }
+	        });
+
+	        var n = d.getElementsByTagName("script")[0],
+	            s = d.createElement("script"),
+	            f = function () { n.parentNode.insertBefore(s, n); };
+	        s.type = "text/javascript";
+	        s.async = true;
+	        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+	        if (w.opera == "[object Opera]") {
+	            d.addEventListener("DOMContentLoaded", f, false);
+	        } else { f(); }
+	    })(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/33290838" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	</body>
+</html>

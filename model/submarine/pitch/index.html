@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Авто дифферент модели подводной лодки на MPU-6050</title>
+    	<link rel="stylesheet" href="/assets/style.css">
+    	 
+    
+        <meta name="description" content="контроль дифферента радиоуправляемой подводной лодки">
+    
+
+	</head>
+
+	<body class="radio">
+	<div id="wrapper">
+
+	
+
+	<header id="header">
+		<div class="logo">
+			<a href="/">
+			Мельников Иван
+			</a>
+		</div>
+
+		<nav>
+			<label for="show-menu" class="show-menu"></label>
+			<input type="checkbox" id="show-menu" role="button"/>
+			<ul id="menu">
+				<li class="nav-model"><a href="/model">Моделизм</a></li>
+				<li class="nav-radio"><a href="/radio">Электроника</a></li>
+				<li class="nav-dev"><a href="/dev">Dev</a></li>
+				<li class="nav-contact"><a href="/contact">Контакты</a></li>
+				<li class="nav-search"><a href="/search">Поиск</a></li>
+			</ul>
+		</nav>
+	</header>
+	<br style="clear:both;"/>
+
+	
+
+	<section id="content">
+
+	
+
+<span itemprop="articleSection">
+<a href="/">Главная</a>
+ 
+	
+	 
+	/ <a href="/model">Моделизм</a>
+	
+
+  
+	
+	 
+	/ <a href="/model/submarine">Подводная лодка на радиоуправлении</a>
+	
+
+   
+</span>
+
+<h1>Авто дифферент модели подводной лодки на MPU-6050</h1>
+
+
+
+<ul id="tags">
+
+	<li>
+		<a href="/tag/электроника">Электроника</a>
+	</li>	
+
+	<li>
+		<a href="/tag/arduino">Arduino</a>
+	</li>	
+
+	<li>
+		<a href="/tag/радиоуправление">Радиоуправление</a>
+	</li>	
+
+	<li>
+		<a href="/tag/подводная лодка">Подводная Лодка</a>
+	</li>	
+
+	<li>
+		<a href="/tag/I2C">I2c</a>
+	</li>	
+
+</ul>
+
+
+
+
+
+<section id="page-content">
+	<p>Данное устройство предназначено для удержания радиоуправляемой модели подводной лодки в горизонтальном положении. В основе лежит гироскоп MPU-6050 и Arduino. Для минимизации размеров платы и энегропотребления вместо Arduino используется плата Digispark (на Attiny85).</p>
+<p>Гироскоп MPU-6050 доступен по протоколу I2C. Для полноразмерной Arduino используется библиотека Wire. Мы же воспльзуемся библиотекой TinyWireM. Для установки скачайте zip-архив с сайта <a href="https://github.com/adafruit/TinyWireM">TinyWireM</a>.</p>
+<p>Данные от гироскопа приходят со значительными шумами. Чтобы сгладить значения с сенсора, используется фильтр Калмана. Для этого скачайте zip-архив из репозитория <a href="https://github.com/TKJElectronics/KalmanFilter">KalmanFilter</a>.</p>
+<p>Подключение Digispark отличается от ардуино. О нюансах подключения можно почитать на сайте <a href="http://digistump.com/wiki/digispark/tutorials/connecting">Digispark</a>, там же большой раздел по решению проблем.</p>
+<h2>Подключение</h2>
+<p>Пины Digispark</p>
+<ul>
+<li>0 data</li>
+<li>2 clck</li>
+<li>4 pwm</li>
+</ul>
+<p>Пины MPU-6050:</p>
+<ul>
+<li>cldt</li>
+<li>clck</li>
+<li>vcc</li>
+<li>gnd</li>
+</ul>
+<h2>Код</h2>
+<pre><code>#include &lt;TinyWireM.h&gt;   
+#include "Kalman.h"
+
+Kalman kalmanX;
+Kalman kalmanY;
+
+uint8_t IMUAddress = 0x68;
+
+/* IMU Data */
+int16_t accX;
+int16_t accY;
+int16_t accZ;
+int16_t tempRaw;
+int16_t gyroX;
+int16_t gyroY;
+int16_t gyroZ;
+
+double accXangle; // Angle calculate using the accelerometer
+double accYangle;
+double temp;
+
+double kalAngleX; // Calculate the angle using a Kalman filter
+double kalAngleY;
+
+uint32_t timer;
+
+int led = 1;
+
+void setup() {  
+  pinMode(led, OUTPUT);
+
+  TinyWireM.begin();
+  i2cWrite(0x6B,0x00); // Disable sleep mode  
+  if(i2cRead(0x75,1)[0] != 0x68) { // Read "WHO_AM_I" register
+    while(1);
+  }      
+  kalmanX.setAngle(180); // Set starting angle
+  kalmanY.setAngle(180);
+  timer = micros();
+}
+
+void loop() {
+  /* Update all the values */
+  uint8_t* data = i2cRead(0x3B,14);  
+  accX = ((data[0] &lt;&lt; 8) | data[1]);
+  accY = ((data[2] &lt;&lt; 8) | data[3]);
+  accZ = ((data[4] &lt;&lt; 8) | data[5]);  
+  tempRaw = ((data[6] &lt;&lt; 8) | data[7]);  
+  gyroX = ((data[8] &lt;&lt; 8) | data[9]);
+  gyroY = ((data[10] &lt;&lt; 8) | data[11]);
+  gyroZ = ((data[12] &lt;&lt; 8) | data[13]);
+
+  /* Calculate the angls based on the different sensors and algorithm */
+  accYangle = (atan2(accX,accZ)+PI)*RAD_TO_DEG;
+  accXangle = (atan2(accY,accZ)+PI)*RAD_TO_DEG;    
+
+  double gyroXrate = (double)gyroX/131.0;
+  double gyroYrate = -((double)gyroY/131.0);
+
+  // Calculate the angle using a Kalman filter
+  kalAngleX = kalmanX.getAngle(accXangle, gyroXrate, (double)(micros()-timer)/1000000);
+  kalAngleY = kalmanY.getAngle(accYangle, gyroYrate, (double)(micros()-timer)/1000000);
+  timer = micros();
+
+  digitalWrite(led, HIGH);
+  delay(abs(kalAngleX - 180) * 10);
+  digitalWrite(led, LOW);
+
+  delay(100); // The accelerometer's maximum samples rate is 1kHz
+}
+void i2cWrite(uint8_t registerAddress, uint8_t data){
+  TinyWireM.beginTransmission(IMUAddress);
+  TinyWireM.send(registerAddress);
+  TinyWireM.send(data);
+  TinyWireM.endTransmission();
+}
+uint8_t* i2cRead(uint8_t registerAddress, uint8_t nbytes) {
+  uint8_t data[nbytes];
+  TinyWireM.beginTransmission(IMUAddress);
+  TinyWireM.send(registerAddress);
+  TinyWireM.endTransmission(false);
+  TinyWireM.requestFrom(IMUAddress, nbytes);
+  for(uint8_t i = 0; i &lt; nbytes; i++) {
+      data[i] = TinyWireM.receive();
+  }
+  return data;
+}
+</code></pre>	
+</section>
+
+
+	<div id="disqus_thread"/>
+<script type="text/javascript">
+    var disqus_shortname = 'imelnikov';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+	</section>
+
+	
+
+	<footer id="footer">
+	<div class="powered">
+	Powered by <a href="https://github.com/melnikov-ivan/tagy">Tagy</a>
+	</div>
+	</footer>
+
+	</div>
+
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/ga.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-56086874-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+	    (function (d, w, c) {
+	        (w[c] = w[c] || []).push(function() {
+	            try {
+	                w.yaCounter33290838 = new Ya.Metrika({
+	                    id:33290838,
+	                    clickmap:true,
+	                    trackLinks:true,
+	                    accurateTrackBounce:true
+	                });
+	            } catch(e) { }
+	        });
+
+	        var n = d.getElementsByTagName("script")[0],
+	            s = d.createElement("script"),
+	            f = function () { n.parentNode.insertBefore(s, n); };
+	        s.type = "text/javascript";
+	        s.async = true;
+	        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+	        if (w.opera == "[object Opera]") {
+	            d.addEventListener("DOMContentLoaded", f, false);
+	        } else { f(); }
+	    })(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/33290838" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	</body>
+</html>

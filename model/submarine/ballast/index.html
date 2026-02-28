@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Объем балластной цистерны</title>
+    	<link rel="stylesheet" href="/assets/style.css">
+    	 
+    
+        <meta name="description" content="Расчет балластной цистерны модели подводной лодки">
+    
+
+	</head>
+
+	<body class="model">
+	<div id="wrapper">
+
+	
+
+	<header id="header">
+		<div class="logo">
+			<a href="/">
+			Мельников Иван
+			</a>
+		</div>
+
+		<nav>
+			<label for="show-menu" class="show-menu"></label>
+			<input type="checkbox" id="show-menu" role="button"/>
+			<ul id="menu">
+				<li class="nav-model"><a href="/model">Моделизм</a></li>
+				<li class="nav-radio"><a href="/radio">Электроника</a></li>
+				<li class="nav-dev"><a href="/dev">Dev</a></li>
+				<li class="nav-contact"><a href="/contact">Контакты</a></li>
+				<li class="nav-search"><a href="/search">Поиск</a></li>
+			</ul>
+		</nav>
+	</header>
+	<br style="clear:both;"/>
+
+	
+
+	<section id="content">
+
+	
+
+<span itemprop="articleSection">
+<a href="/">Главная</a>
+ 
+	
+	 
+	/ <a href="/model">Моделизм</a>
+	
+
+  
+	
+	 
+	/ <a href="/model/submarine">Подводная лодка на радиоуправлении</a>
+	
+
+   
+</span>
+
+<h1>Объем балластной цистерны</h1>
+
+
+
+<ul id="tags">
+
+	<li>
+		<a href="/tag/подводная лодка">Подводная Лодка</a>
+	</li>	
+
+	<li>
+		<a href="/tag/теория">Теория</a>
+	</li>	
+
+</ul>
+
+
+
+
+
+<section id="page-content">
+	<p>Внутреннее устройство <a href="/model/submarine">радиоуправляемой подводной лодки</a> похоже на настоящую лодку. Она состоит из 3 основных частей:</p>
+<ul>
+<li>легкий корпус </li>
+<li>прочный корпус (WTC - water tight cylinder)</li>
+<li>балластная цистерна - БЦ</li>
+</ul>
+<p>Рекомендую изучить прочие <a href="/model/term">термины судомоделизма</a>.</p>
+<p><img src="/img/submarine/sub-plan.png" alt="основные компоненты подводной лодки"></p>
+<p>Давайте разберемся как же подводная лодка погружается. Это поможет нам выбрать правильные компоненты при проектировании. Итак.</p>
+<h2>Теория погружения</h2>
+<p>В погруженном состоянии легкий корпус заполнен водой, внутри него распологается WTC (прочный корпус) со всей электроникой. В том числе там же распологается и балластная цистерна (БЦ), которая качает забортную воду внутрь прочного корпуса, тем самым увеличивая его массу.</p>
+<p>Для расчета размеров БЦ нужно вспомнить школьную физику и закон Архимеда. Пусть,</p>
+<ul>
+<li>V1 - объем надводной части</li>
+<li>V2 - объем подводной части</li>
+<li>Vb - объем БЦ (входит в объем V2)</li>
+<li>М - масса всей лодки</li>
+<li>R - плотность воды</li>
+</ul>
+<p><img src="/img/submarine/arhimed.png" alt="закон архимеда для подводной лодки"></p>
+<p>Закон Архимеда гласит, что выталкивающая сила равна массе вытесненной воды. Если лодка на поверхности, получаем.</p>
+<p><code>R * V2 = M</code></p>
+<p>В погруженном состоянии сила Архимеда, должна быть меньше либо равна массе лодки и воды в БЦ.</p>
+<p><code>R (V1 + V2) &lt; M + (R * Vb)</code></p>
+<p>Подставляем М из первого уравнения</p>
+<pre><code>RV1 + RV2 &lt; RV2 + RVb
+RV1 &lt; RVb
+V1 &lt; Vb
+</code></pre>
+<p>Самый главный вывод этой статьи:</p>
+<p><strong>Объем надводной части должен быть меньше объема БЦ.</strong></p>
+<h2>Выводы</h2>
+<p>Самая частая ошибка - неправильно понимают слова "надоводной части". Имеется в виду не объем всей лодки, выступающий надо водой (как если бы мы перевернули лодку, и налили воду внутрь легкого корпуса по ватерлинию). А только объем стенок легкого корпуса, т.к. воздух из под него выйдет через технические отверстия во время погружения.</p>
+<p><strong>WTC желательно распологать ниже ватерлинии</strong>. Потому что весь объем WTC выше ватерлинии подпадает под определение "надводной части". Воздух из него не выйдет. А это потребует значительно увеличить объем БЦ (балластной цистерны).</p>
+<p>Почему нельзя сделать большую балластную цистерну? Потому что она будет занимать значительную часть WTC. Потребуется более мощный двигатель, чтобы быстро заполнять воду (дольше 30 сек будет скучно). Мощный двигатель будет потреблять много тока, и время плавания сократится.</p>
+<p>Лучше использовать БЦ только для поднятия из воды <em>полезной</em> нагрузки: рубка, высокие борта, палубные орудия, антенны и т.п.</p>
+<h2>Пример расчета</h2>
+<p>Давайте прикинем конфигурацию типичной модели подводной лодки. Как и во многих видах моделизма (да и нашей жизни), тут есть оптимальные размеры - от 1.0 до 1.5 метров. Лодка длиной 50см потребует редкие микродвигатели, микро-серв, тонкие валы (тоже редки) и т.п. Большую лодку длиной 2м будет уже неудобно транспортировать, она будет тяжелой, требовать мощные дорогие двигатели, дорогие аккумуляторы и т.п.</p>
+<h3>Размеры</h3>
+<p>Для первой лодки подойдет размер 1м, давайте от него отталкиваться. Выберите понравившийся прототип. Обычно ширина лодки равна 1/10 ее длины, скажем 10см. Тогда приблизительная площадь легкого корпуса выступающая из воды будет 1000см². Если толщину стенок корпуса принять за 0.1см, то получаем объем выступающих частей 100мл. Значит БЦ должна быть не меньше 100мл.</p>
+<h3>Объем БЦ</h3>
+<p>Для такой БЦ подойдет большой шприц на 150 мл (шприц Жане) и <a href="https://goo.gl/mpOcAj">перистальтический насос</a>.</p>
+<h3>Диаметр WTC</h3>
+<p>Пусть высота нашей лодки 12см (без рубки), а ватерлиния 9см от киля. Если расположить под WTC 1 см свинцового балласта, то до ватерлинии остается место под трубу диаметром 70-80мм. Это нормальный размер, вы легко найдете моторы, сервы приемники, которые свободно расположатся внутри. Расположить всю электронику в трубе диаметром 50мм и меньше будет очень сложно.</p>
+<h3>Длина WTC</h3>
+<p>Если в качестве БЦ использовать щприц на 150мл и насос, то вместе с аккумулятором, примеником, сервами и мотором то выйдет 50-60 см. Как раз остается по 20см спереди и сзади лодки на сужение сечения профиля лодки.</p>
+<h3>Вес лодки</h3>
+<p>Объем такого WTC получается примерно 3 литра. Чтобы его утопить, масса лодки вместе с водой в БЦ должна быть больше 3кг. Т.к. БЦ у нас всего 150мл, то масса сухой долки получается около 3кг. Скорее всего потребуется свинцовый груз.</p>
+<h2>Читайте также</h2>
+<p><a href="/model/submarine/3d-print-wtc">3d-печать подводной лодки</a></p>	
+</section>
+
+
+	<div id="disqus_thread"/>
+<script type="text/javascript">
+    var disqus_shortname = 'imelnikov';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+	</section>
+
+	
+
+	<footer id="footer">
+	<div class="powered">
+	Powered by <a href="https://github.com/melnikov-ivan/tagy">Tagy</a>
+	</div>
+	</footer>
+
+	</div>
+
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/ga.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-56086874-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+	    (function (d, w, c) {
+	        (w[c] = w[c] || []).push(function() {
+	            try {
+	                w.yaCounter33290838 = new Ya.Metrika({
+	                    id:33290838,
+	                    clickmap:true,
+	                    trackLinks:true,
+	                    accurateTrackBounce:true
+	                });
+	            } catch(e) { }
+	        });
+
+	        var n = d.getElementsByTagName("script")[0],
+	            s = d.createElement("script"),
+	            f = function () { n.parentNode.insertBefore(s, n); };
+	        s.type = "text/javascript";
+	        s.async = true;
+	        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+	        if (w.opera == "[object Opera]") {
+	            d.addEventListener("DOMContentLoaded", f, false);
+	        } else { f(); }
+	    })(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/33290838" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	</body>
+</html>

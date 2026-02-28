@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Радиоуправление на Arduino</title>
+    	<link rel="stylesheet" href="/assets/style.css">
+    	 
+    
+        <meta name="description" content="Радиоуправление на arduino своими руками">
+    
+
+	</head>
+
+	<body class="radio">
+	<div id="wrapper">
+
+	
+
+	<header id="header">
+		<div class="logo">
+			<a href="/">
+			Мельников Иван
+			</a>
+		</div>
+
+		<nav>
+			<label for="show-menu" class="show-menu"></label>
+			<input type="checkbox" id="show-menu" role="button"/>
+			<ul id="menu">
+				<li class="nav-model"><a href="/model">Моделизм</a></li>
+				<li class="nav-radio"><a href="/radio">Электроника</a></li>
+				<li class="nav-dev"><a href="/dev">Dev</a></li>
+				<li class="nav-contact"><a href="/contact">Контакты</a></li>
+				<li class="nav-search"><a href="/search">Поиск</a></li>
+			</ul>
+		</nav>
+	</header>
+	<br style="clear:both;"/>
+
+	
+
+	<section id="content">
+
+	
+
+<span itemprop="articleSection">
+<a href="/">Главная</a>
+ 
+	
+	 
+	/ <a href="/radio">Электроника</a>
+	
+
+   
+</span>
+
+<h1>Радиоуправление на Arduino</h1>
+
+
+
+<ul id="tags">
+
+	<li>
+		<a href="/tag/электроника">Электроника</a>
+	</li>	
+
+	<li>
+		<a href="/tag/arduino">Arduino</a>
+	</li>	
+
+	<li>
+		<a href="/tag/радиоуправление">Радиоуправление</a>
+	</li>	
+
+	<li>
+		<a href="/tag/протокол">Протокол</a>
+	</li>	
+
+</ul>
+
+
+
+
+
+<section id="page-content">
+	<p></p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/LnvCTIS4Kwk" frameborder="0" allowfullscreen></iframe></p>
+<p>Соберем радиоуправление на основе Arduino Uno и радиомодуля MX-05v. Этот модуль работает на частоте 443 МГц, что позволяет использовать его под водой (волны в диапазоне 2.4 ГГц не проникают под воду). Потом поставим его на модель <a href="/model/submarine">Радиоуправляемой Подводной Лодки</a>.</p>
+<p>Радиомодуль MX-05V + MX-FS-03V подкупает своей низкой ценой - около 60 рублей за пару. Заявленной дальности связи 20-200 метров хватает для небольших моделей машин или лодок.</p>
+<p>Сделаем одноканальную аппаратуду. Для этого нам понадобятся:</p>
+<ul>
+<li>2 платы Ардуино для приемника и передатчика</li>
+<li>комплект радиомодуля MX-05V + MX-FS-03V</li>
+<li>переменный резистор или джойстик для передатчика</li>
+<li>рулевая машинка (серва) для приемника</li>
+</ul>
+<p>Суть работы программы заключается в следующем:</p>
+<ul>
+<li>считываем значение с переменного резистора (число от 0 до 1023)</li>
+<li>переводим это число в 2 байта (16 бит, т.к. 1023 занимает 10 бит и не поместится в один байт)</li>
+<li>передаем по радио-каналу</li>
+<li>приемник принимает 2 байта по радио каналу</li>
+<li>переводит их обратно в число от 0 до 1023</li>
+<li>передает команду серво-машинке</li>
+</ul>
+<p>Принцип работы Arduino доступно описан на разных веб-ресурсах. Мне понравился бесплатный обучающий онлайн курс «<a href="https://goo.gl/8N4TQi">Строим роботов и другие устройства на Arduino</a>». Рекомендую.</p>
+<p>Загружаем текс программы (скетч) для передатчика и приемников. Кстати, программы надо хранить в разных папках, иначе во время компиляции они будут сливаться в один файл и конфликтовать из-за дублирования функций <code>setup</code> и <code>loop</code>.
+Как подключить сторонние библиотеки к Arduino описано например <a href="https://goo.gl/6FexuR">тут</a>.</p>
+<h2>Передатчик</h2>
+<pre><code>// Библиотека передатчика
+#include &lt;VirtualWire.h&gt;
+
+void setup() 
+{ 
+    // Запуск передатчика
+    vw_set_ptt_inverted(true);
+    vw_setup(1000); // Bits per sec 
+}
+
+void loop() 
+{
+    // чтение показаний с переменного резистора
+    int sensorValue = analogRead(A0);
+
+    // отправляем значение
+    send(sensorValue); 
+}
+
+void send(int param) 
+{ 
+    // конвертируем int в массив из 2 байт
+    uint8_t msg[2];
+    int len = 2;
+    msg[0] = highByte(param);
+    msg[1] = lowByte(param);
+
+    // отправляем непосредственно в радиоканал
+    vw_send(msg, len);
+    // ждем пока сообщение не уйдет целиком
+    vw_wait_tx(); 
+
+}
+</code></pre>
+<h2>Приемник</h2>
+<pre><code>// Библиотека для приемника
+#include &lt;VirtualWire.h&gt;
+
+// Библиотека для серво машинки. В отличии от обычной Servo.h не конфликтует с VirtualWire.h
+// Скачать библиотеку можно тут. 
+// http://en.osdn.jp/projects/sfnet_pgahtow/downloads/Arduino%20(v1.0)%20libaries/ServoTimer2.zip/
+// Надо закомментировать 41 строчку в файле ServoTimer2.h в случае ошибки компиляции
+// 'typedef uint8_t boolean;'
+#include &lt;ServoTimer2.h&gt;
+
+// Создаем объект серво-машинки
+ServoTimer2 myservo;
+
+void setup() 
+{ 
+    // для отладки
+    // Serial.begin(9600);
+
+    // Запуск приемника
+    vw_set_ptt_inverted(true);
+    vw_setup(1000); // бит в секунду
+    vw_rx_start(); // запуск приемника
+
+    // подключаем серво к 6 пину 
+    myservo.attach(6);
+}
+
+void loop() 
+{ 
+    uint8_t msg[2];
+    uint8_t len = 2;
+
+    if (vw_get_message(msg, &amp;len)) {
+        // переводим байты в int
+        int value = word(msg[0], msg[1]);
+
+        // подгоняем под диапазон входных данных сервы
+        int sValue = map(value, 0, 1023, 600, 2400);
+        myservo.write(sValue);
+
+        // Serial.println(sValue);
+    }
+}
+</code></pre>
+<p><strong>И в итоге - ничего не работает!</strong>
+Почему?</p>
+<h2>Питание</h2>
+<p>Радиомодуль MX-05V очень простой, из-за этого он очень восприимчив к внешним помехам. И даже такой маленький мотор как в серво-машинке способен нарушить его работу. Для того, чтобы минимизировать влияние электромотора (это касается только колекторных моторов), нужно разделить питание силовой части от приемника. При этом «минус» у них должен быть общий. Итоговая схема подключения приемника выглядит так.</p>
+<h2>Результат</h2>
+<p>Данные радиомодуль слишком восприимчив к помехам, и управлять летательной техникой на нем нельзя. Но для игрушечной машинки или лодки вполне подойдет.</p>
+<p><!-- 1. Link to jQuery (1.8 or later), -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!-- 33 KB -->
+
+<!-- fotorama.css & fotorama.js. -->
+<link  href="//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB --></p>
+<p><div class="fotorama" data-nav="thumbs" data-width="100%" data-ratio="800/600">
+    
+    
+    <a href="/img/arduino/IMG_20160409_135401.jpg"><img src="/img/arduino/IMG_20160409_135401-172x172.jpg"/></a>
+    
+    
+    <a href="/img/arduino/mx-05v.jpg"><img src="/img/arduino/mx-05v-172x172.jpg"/></a>
+    
+</div></p>	
+</section>
+
+
+	<div id="disqus_thread"/>
+<script type="text/javascript">
+    var disqus_shortname = 'imelnikov';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+	</section>
+
+	
+
+	<footer id="footer">
+	<div class="powered">
+	Powered by <a href="https://github.com/melnikov-ivan/tagy">Tagy</a>
+	</div>
+	</footer>
+
+	</div>
+
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/ga.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-56086874-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+	    (function (d, w, c) {
+	        (w[c] = w[c] || []).push(function() {
+	            try {
+	                w.yaCounter33290838 = new Ya.Metrika({
+	                    id:33290838,
+	                    clickmap:true,
+	                    trackLinks:true,
+	                    accurateTrackBounce:true
+	                });
+	            } catch(e) { }
+	        });
+
+	        var n = d.getElementsByTagName("script")[0],
+	            s = d.createElement("script"),
+	            f = function () { n.parentNode.insertBefore(s, n); };
+	        s.type = "text/javascript";
+	        s.async = true;
+	        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+	        if (w.opera == "[object Opera]") {
+	            d.addEventListener("DOMContentLoaded", f, false);
+	        } else { f(); }
+	    })(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/33290838" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	</body>
+</html>
